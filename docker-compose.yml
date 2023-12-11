@@ -1,0 +1,70 @@
+version: '3.4'
+
+networks:
+  albums:
+  customers:
+  orders:
+
+services:
+  albums.api:
+    image: ${DOCKER_REGISTRY-}albumsapi
+    networks:
+     - albums
+    build:
+      context: .
+      dockerfile: MicroServices/APIs/Albums/Albums.API/Dockerfile
+    depends_on:
+      - albums.db
+    environment:
+      - DB_HOST=albums.db
+      - DB_DATABASE=AlbumsDB
+
+  customers.api:
+    image: ${DOCKER_REGISTRY-}customersapi
+    networks:
+     - customers
+    build:
+      context: .
+      dockerfile: MicroServices/APIs/Customers/Customers.API/Dockerfile
+    depends_on:
+      - customers.db
+    environment:
+      - DB_HOST=customers.db
+      - DB_DATABASE=CustomersDB
+
+  orders.api:
+    image: ${DOCKER_REGISTRY-}ordersapi
+    networks:
+     - orders
+    build:
+      context: .
+      dockerfile: MicroServices/APIs/Orders/Orders.API/Dockerfile
+    depends_on:
+      - orders.db
+    environment:
+     - DB_HOST=orders.db
+     - DB_DATABASE=OrdersDB
+
+  albums.db:
+    container_name: albumsdb
+    image: mongo:latest
+    networks:
+     - albums
+    ports:
+     - "6003:27017"
+
+  customers.db:
+    container_name: customersdb
+    image: mongo:latest
+    networks:
+     - customers
+    ports:
+     - "6001:27017"
+
+  orders.db:
+    container_name: ordersdb
+    image: mongo:latest
+    networks:
+     - orders
+    ports:
+     - "6002:27017"
