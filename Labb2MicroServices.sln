@@ -19,15 +19,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orders", "Orders", "{AB3FB9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Albums.API", "MicroServices\APIs\Albums\Albums.API\Albums.API.csproj", "{CE5D82D6-01EA-4AD8-A93C-121A40EC01B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Albums.DataAccess", "MicroServices\APIs\Albums\Albums.DataAccess\Albums.DataAccess.csproj", "{FF4B313C-ACEE-4383-88E5-C9B196564262}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Albums.DataAccess", "MicroServices\APIs\Albums\Albums.DataAccess\Albums.DataAccess.csproj", "{FF4B313C-ACEE-4383-88E5-C9B196564262}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customers.DataAccess", "MicroServices\APIs\Customers\Customers.DataAccess\Customers.DataAccess.csproj", "{6C0A32EC-8051-46EC-8D42-B9F92D784565}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customers.DataAccess", "MicroServices\APIs\Customers\Customers.DataAccess\Customers.DataAccess.csproj", "{6C0A32EC-8051-46EC-8D42-B9F92D784565}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customers.API", "MicroServices\APIs\Customers\Customers.API\Customers.API.csproj", "{2CF2BA20-EB75-472B-8795-D508AA3D7456}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customers.API", "MicroServices\APIs\Customers\Customers.API\Customers.API.csproj", "{2CF2BA20-EB75-472B-8795-D508AA3D7456}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orders.API", "MicroServices\APIs\Orders\Orders.API\Orders.API.csproj", "{5F20D25B-BFE4-4923-B19D-9D6CD07EFB9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orders.API", "MicroServices\APIs\Orders\Orders.API\Orders.API.csproj", "{5F20D25B-BFE4-4923-B19D-9D6CD07EFB9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orders.DataAccess", "MicroServices\APIs\Orders\Orders.DataAccess\Orders.DataAccess.csproj", "{EE48C69C-7DC9-47E2-A5BC-BE4D3D0A8125}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orders.DataAccess", "MicroServices\APIs\Orders\Orders.DataAccess\Orders.DataAccess.csproj", "{EE48C69C-7DC9-47E2-A5BC-BE4D3D0A8125}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{D0DBFE35-B64A-424A-83D9-A06A47EDB172}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{EE48C69C-7DC9-47E2-A5BC-BE4D3D0A8125}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE48C69C-7DC9-47E2-A5BC-BE4D3D0A8125}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE48C69C-7DC9-47E2-A5BC-BE4D3D0A8125}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0DBFE35-B64A-424A-83D9-A06A47EDB172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0DBFE35-B64A-424A-83D9-A06A47EDB172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0DBFE35-B64A-424A-83D9-A06A47EDB172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0DBFE35-B64A-424A-83D9-A06A47EDB172}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
