@@ -4,6 +4,6 @@ using MongoDB.Bson;
 
 namespace Albums.DataAccess.Repositories.Interfaces;
 
-public interface IAlbum : IGenericRepository<Album, ObjectId>
+public interface IAlbumRepository : IGenericRepository<Album, ObjectId>
 {
 }

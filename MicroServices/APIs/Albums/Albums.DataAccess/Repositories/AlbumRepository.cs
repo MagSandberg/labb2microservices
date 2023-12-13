@@ -5,13 +5,13 @@ using MongoDB.Driver;
 
 namespace Albums.DataAccess.Repositories;
 
-public class AlbumRepository : IAlbum
+public class AlbumRepository : IAlbumRepository
 {
     private readonly IMongoCollection<Album> _collection;
 
     public AlbumRepository()
     {
-        var hostname = Environment.GetEnvironmentVariable("DB_HOST"); //"localhost";
+        var hostname = Environment.GetEnvironmentVariable("DB_HOST");
         var databaseName = Environment.GetEnvironmentVariable("DB_DATABASE");
         var connectionString = $"mongodb://{hostname}:27017";
 
@@ -36,12 +36,12 @@ public class AlbumRepository : IAlbum
         await _collection.InsertOneAsync(entity);
     }
 
-    public async Task<Album> UpdateAsync(Album entity)
+    public async Task UpdateAsync(Album entity)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Album> DeleteAsync(ObjectId id)
+    public async Task DeleteAsync(ObjectId id)
     {
         throw new NotImplementedException();
     }
