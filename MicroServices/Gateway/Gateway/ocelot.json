@@ -1,0 +1,69 @@
+{
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/customers",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customers.api",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/"
+    },
+    {
+      "UpstreamPathTemplate": "/customers/{CustomerId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customers.api",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/{CustomerId}"
+    },
+    {
+      "UpstreamPathTemplate": "/albums/get-all",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "albums.api",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/get-all"
+    },
+    {
+      "UpstreamPathTemplate": "/albums/get-by-id/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "albums.api",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/get-by-id/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/albums/add",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "albums.api",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/add"
+    }
+
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000/"
+  }
+}
