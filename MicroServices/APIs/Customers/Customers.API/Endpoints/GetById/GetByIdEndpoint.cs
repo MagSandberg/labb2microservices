@@ -9,7 +9,8 @@ public class GetByIdEndpoint(ICustomerRepository customerRepository) : Endpoint<
 {
     public override void Configure()
     {
-        Get("{customerId}");
+        Get("/{CustomerId}");
+        AllowAnonymous();
     }
 
     public override async Task HandleAsync(GetByIdRequest getByIdRequest, CancellationToken cancellationToken)

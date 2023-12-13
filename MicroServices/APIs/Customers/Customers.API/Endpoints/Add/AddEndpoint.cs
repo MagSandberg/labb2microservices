@@ -7,7 +7,7 @@ public class AddEndpoint(ICustomerRepository customerRepository) : Endpoint<AddR
 {
     public override void Configure()
     {
-        Post("add-new-customer");
+        Post("/");
         AllowAnonymous();
     }
 

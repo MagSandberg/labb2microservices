@@ -18,6 +18,8 @@ services:
     environment:
       - DB_HOST=albums.db
       - DB_DATABASE=AlbumsDB
+    ports:
+      - "6200:8080" 
 
   customers.api:
     image: ${DOCKER_REGISTRY-}customersapi
@@ -31,7 +33,10 @@ services:
     environment:
       - DB_HOST=customers.db
       - DB_DATABASE=CustomersDB
-
+    ports:
+      - "6004:8080"  
+      - "6005:8081"
+       
   orders.api:
     image: ${DOCKER_REGISTRY-}ordersapi
     networks:
@@ -44,6 +49,8 @@ services:
     environment:
      - DB_HOST=orders.db
      - DB_DATABASE=OrdersDB
+    ports:
+      - "6300:8080"
 
   albums.db:
     container_name: albumsdb

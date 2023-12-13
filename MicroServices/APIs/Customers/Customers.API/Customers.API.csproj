@@ -11,16 +11,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FastEndpoints" Version="5.20.1.3-beta" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="FastEndpoints" Version="5.20.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
   </ItemGroup>
 
-  <!--<ItemGroup>
+  <ItemGroup>
     <Folder Include="Endpoints\GetById\" />
-  </ItemGroup>-->
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Customers.DataAccess\Customers.DataAccess.csproj" />

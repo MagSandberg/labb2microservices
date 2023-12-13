@@ -5,5 +5,5 @@ namespace Customers.DataAccess;
 
 public interface ICustomerRepository : IGenericRepository<Customer, ObjectId>
 {
-    
+  
 }

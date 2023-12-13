@@ -1,4 +1,8 @@
-﻿namespace Domain.Common.DTOs;
+﻿
+
+using MongoDB.Bson;
+
+namespace Domain.Common.DTOs;
 
 public record CustomerDto(
     string Name,
@@ -8,3 +12,5 @@ public record CustomerDto(
     string StreetAddress,
     int PostalCode
     );
+
+

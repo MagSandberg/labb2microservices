@@ -9,12 +9,13 @@ builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-}
+//if (app.Environment.IsDevelopment())
+//{
+//}
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
 app.UseFastEndpoints();
 
 app.Run();
