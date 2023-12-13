@@ -1,0 +1,27 @@
+@Customer.API_HostAddress = http://localhost:5292
+
+GET {{Customer.API_HostAddress}}/
+Accept: application/json
+
+###
+POST {{Customer.API_HostAddress}}/add
+Content-Type: application/json
+
+{
+  "NewCustomer":{
+      "Name": "Kribbo",
+      "Email": "kribbi@mail.com",
+      "Country": "Sweden",
+      "City": "Gothenburg",
+      "StreetAddress": "Bästa Gatan 1",
+      "PostalCode": 12345
+  }
+}
+
+###
+DELETE {{Customer.API_HostAddress}}/delete
+Content-Type: application/json
+
+{
+  "CustomerId": "65673706db2d9b62e2aff057"
+}
