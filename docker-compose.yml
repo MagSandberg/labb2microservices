@@ -4,12 +4,14 @@ networks:
   albums:
   customers:
   orders:
+  gateway:
 
 services:
   albums.api:
     image: ${DOCKER_REGISTRY-}albumsapi
     networks:
      - albums
+     - gateway
     build:
       context: .
       dockerfile: MicroServices/APIs/Albums/Albums.API/Dockerfile
@@ -25,6 +27,7 @@ services:
     image: ${DOCKER_REGISTRY-}customersapi
     networks:
      - customers
+     - gateway
     build:
       context: .
       dockerfile: MicroServices/APIs/Customers/Customers.API/Dockerfile
@@ -41,6 +44,7 @@ services:
     image: ${DOCKER_REGISTRY-}ordersapi
     networks:
      - orders
+     - gateway
     build:
       context: .
       dockerfile: MicroServices/APIs/Orders/Orders.API/Dockerfile
@@ -75,3 +79,19 @@ services:
      - orders
     ports:
      - "6002:27017"
+
+  gateway:
+    image: ${DOCKER_REGISTRY-}gateway
+    build:
+      context: .
+      dockerfile: MicroServices/Gateway/Gateway/Dockerfile
+    networks:
+     - gateway
+    depends_on:
+     - albums.api
+     - customers.api
+     - orders.api
+    ports:
+     - "5000:8080"
+     - "5001:8081"
+
