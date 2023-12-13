@@ -1,8 +1,4 @@
-﻿
-
-using MongoDB.Bson;
-
-namespace Domain.Common.DTOs;
+﻿namespace Domain.Common.DTOs;
 
 public record CustomerDto(
     string Name,
