@@ -15,7 +15,7 @@ public class OrderRepository : IOrderRepository
 
 		var client = new MongoClient(connectionString);
 		var database = client.GetDatabase(databaseName);
-		_orderCollection = database.GetCollection<Order>("Customers", new MongoCollectionSettings() { AssignIdOnInsert = true });
+		_orderCollection = database.GetCollection<Order>("Orders", new MongoCollectionSettings() { AssignIdOnInsert = true });
 	}
 
 

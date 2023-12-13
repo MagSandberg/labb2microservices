@@ -2,6 +2,7 @@
 using FastEndpoints;
 using Orders.DataAccess;
 
+
 namespace Orders.API.Endpoints.GetAll;
 
 public class GetAllEndpoint(IOrderRepository orderRepository) : Endpoint<GetAllRequest, GetAllResponse>
@@ -20,14 +21,9 @@ public class GetAllEndpoint(IOrderRepository orderRepository) : Endpoint<GetAllR
 				new OrderDto(
 					order.CustomerId,
 					order.OrderDate,
-					order.OrderDetail.Select(orderDetail => new OrderDetailDto(
-					{
-						AlbumId = orderDetail.AlbumId,
-						Quantity = orderDetail.Quantity
-					}),
+					order.OrderDetail.Select(orderDetail => new OrderDetailDto(orderDetail.AlbumId, orderDetail.Quantity)),
 					order.TotalAmount
-					)
-		);
+					));
 
 		await SendAsync(
 			new GetAllResponse()

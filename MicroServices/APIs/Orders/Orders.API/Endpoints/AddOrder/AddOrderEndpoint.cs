@@ -8,7 +8,7 @@ public class AddOrderEndpoint(IOrderRepository orderRepository) : Endpoint<AddOr
 {
 	public override void Configure()
 	{
-		Post("add-order");
+		Post("/add");
 		AllowAnonymous();
 	}
 
@@ -16,8 +16,8 @@ public class AddOrderEndpoint(IOrderRepository orderRepository) : Endpoint<AddOr
 	{
 		var order = new Order
 		{
-			CustomerId = addOrderRequest.NewOrder.CustomerId,
-			OrderDate = addOrderRequest.NewOrder.OrderDate,
+			CustomerId = addOrderRequest.NewOrder!.CustomerId,
+			OrderDate = DateTime.UtcNow,
 			OrderDetail = addOrderRequest.NewOrder.OrderDetail.Select(orderDetailDto => new OrderDetail()
 			{
 				AlbumId = orderDetailDto.AlbumId,
