@@ -1,6 +1,6 @@
 ﻿namespace Domain.Common.DTOs;
 
 public record OrderDetailDto(
-    string Album,
+    string AlbumId,
     int Quantity
     );
