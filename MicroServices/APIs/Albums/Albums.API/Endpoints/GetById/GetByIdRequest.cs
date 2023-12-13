@@ -1,8 +1,6 @@
-﻿using MongoDB.Bson;
-
-namespace Albums.API.Endpoints.GetById;
+﻿namespace Albums.API.Endpoints.GetById;
 
 public class GetByIdRequest
 {
-    public ObjectId Id { get; init; }
+    public string Id { get; init; }
 }

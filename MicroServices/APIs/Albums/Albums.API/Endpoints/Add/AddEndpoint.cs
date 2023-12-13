@@ -14,12 +14,19 @@ public class AddEndpoint(IAlbumRepository repository) : Endpoint<AddRequest, Add
 
     public override async Task HandleAsync(AddRequest addRequest, CancellationToken ct)
     {
+        var tracks = addRequest.AddAlbum.Tracks.Select(t => new Track
+        {
+            Artist = t.Artist,
+            Name = t.Name,
+            Length = t.Length
+        });
+
         await repository.AddAsync(new Album()
         {
             Title = addRequest.AddAlbum!.Title,
             Artist = addRequest.AddAlbum.Artist,
             Genre = addRequest.AddAlbum.Genre,
-            Tracks = addRequest.AddAlbum.Tracks,
+            Tracks = tracks,
             Price = addRequest.AddAlbum.Price
         });
 

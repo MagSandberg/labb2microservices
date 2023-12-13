@@ -11,6 +11,6 @@ public class Album : IEntity<ObjectId>
     public string Title { get; init; } = string.Empty;
     public string Artist { get; init; } = string.Empty;
     public Genre Genre { get; init; }
-    public IEnumerable<TrackDto> Tracks { get; init; } = null!;
+    public IEnumerable<Track> Tracks { get; init; } = new List<Track>();
     public decimal Price { get; init; }
 }

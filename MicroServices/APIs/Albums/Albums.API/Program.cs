@@ -5,8 +5,9 @@ using Albums.DataAccess.Repositories.Interfaces;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddFastEndpoints();
 builder.Services.AddScoped<IAlbumRepository, AlbumRepository>();
+builder.Services.AddFastEndpoints();
+
 
 var app = builder.Build();
 

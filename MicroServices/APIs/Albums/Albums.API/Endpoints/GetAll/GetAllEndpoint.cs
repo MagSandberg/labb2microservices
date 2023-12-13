@@ -16,12 +16,12 @@ public class GetAllEndpoint(IAlbumRepository repository) : Endpoint<GetAllReques
     {
         var allAlbums = await repository.GetAllAsync();
         var dtos = allAlbums.Select(
-            album =>
+            album => 
                 new AlbumDto(
                     album.Title,
                     album.Artist,
                     album.Genre,
-                    album.Tracks,
+                    album.Tracks.Select(t => new TrackDto(t.Name, t.Artist, t.Length)),
                     album.Price
                     )
             );

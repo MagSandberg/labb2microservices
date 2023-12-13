@@ -1,6 +1,7 @@
 ﻿using Albums.DataAccess.Repositories.Interfaces;
 using Domain.Common.DTOs;
 using FastEndpoints;
+using MongoDB.Bson;
 
 namespace Albums.API.Endpoints.GetById;
 
@@ -14,7 +15,7 @@ public class GetByIdEndpoint(IAlbumRepository repository) : Endpoint<GetByIdRequ
 
     public override async Task HandleAsync(GetByIdRequest getByIdRequest, CancellationToken ct)
     {
-        var album = await repository.GetByIdAsync(getByIdRequest.Id);
+        var album = await repository.GetByIdAsync(ObjectId.Parse(getByIdRequest.Id));
 
         await SendAsync(new GetByIdResponse()
         {
@@ -23,7 +24,7 @@ public class GetByIdEndpoint(IAlbumRepository repository) : Endpoint<GetByIdRequ
                 album.Title,
                 album.Artist,
                 album.Genre,
-                album.Tracks,
+                album.Tracks.Select(t => new TrackDto(t.Name, t.Artist, t.Length)),
                 album.Price
             )
         }, cancellation: ct);
