@@ -4,5 +4,5 @@ namespace Albums.API.Services.Interfaces;
 
 public interface IRabbitMqService
 {
-    IConnection CreateChannel();
+    IConnection CreateConnection();
 }

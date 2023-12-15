@@ -6,7 +6,7 @@ namespace Albums.API.Services;
 
 public class RabbitMqService(RabbitMqConfiguration config) : IRabbitMqService
 {
-    public IConnection CreateChannel()
+    public IConnection CreateConnection()
     {
         var connectionFactory = new ConnectionFactory
         {
