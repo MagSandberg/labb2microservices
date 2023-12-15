@@ -1,6 +1,8 @@
-﻿using Albums.API.Services.Interfaces;
+﻿using System.Text;
+using Albums.API.Services.Interfaces;
 using Domain.Common.RabbitMq;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 
 namespace Albums.API.Services;
 
@@ -21,7 +23,18 @@ public class MessageConsumerService : IMessageConsumerService, IDisposable
 
     public async Task ReadMessagesAsync()
     {
-        throw new NotImplementedException();
+        var consumer = new AsyncEventingBasicConsumer(_channel);
+        consumer.Received += async (sender, e) =>
+        {
+            var body = e.Body.ToArray();
+            var message = Encoding.UTF8.GetString(body);
+            //Add deserialize logic for DTOs here
+            Console.WriteLine($"Message received: {message}");
+            await Task.CompletedTask;
+            _channel.BasicAck(e.DeliveryTag, false);
+        };
+
+        _channel.BasicConsume(QueueName, false, consumer);
     }
 
     public void Dispose()

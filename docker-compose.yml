@@ -11,7 +11,7 @@ services:
   albums.api:
     image: ${DOCKER_REGISTRY-}albumsapi
     networks:
-      - album
+      - albums
       - gateway
       - albumsmq
     build:
