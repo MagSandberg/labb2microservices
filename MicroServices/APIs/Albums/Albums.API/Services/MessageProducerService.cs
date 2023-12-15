@@ -17,7 +17,7 @@ public class MessageProducerService(RabbitMqConfiguration config) : IMessageProd
 
     public async Task SendMessageAsync<T>(T message)
     {
-        var connection = _connectionFactory.CreateConnection();
+        using var connection = _connectionFactory.CreateConnection();
         using var channel = connection.CreateModel();
         channel.QueueDeclare("albumsQueue", durable: true, exclusive: false);
 
