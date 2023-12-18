@@ -6,6 +6,8 @@ networks:
   orders:
   gateway:
   albumsmq:
+  ordersmq:
+  customersmq:
 
 services:
   albums.api:
@@ -30,6 +32,7 @@ services:
     networks:
       - customers
       - gateway
+      - customersmq
     build:
       context: .
       dockerfile: MicroServices/APIs/Customers/Customers.API/Dockerfile
@@ -47,6 +50,7 @@ services:
     networks:
       - orders
       - gateway
+      - ordersmq
     build:
       context: .
       dockerfile: MicroServices/APIs/Orders/Orders.API/Dockerfile
@@ -108,3 +112,5 @@ services:
       - RABBITMQ_DEFAULT_PASS=guest
     networks:
       - albumsmq
+      - customersmq
+      - ordersmq

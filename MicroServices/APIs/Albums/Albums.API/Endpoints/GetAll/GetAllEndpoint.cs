@@ -5,7 +5,7 @@ using FastEndpoints;
 
 namespace Albums.API.Endpoints.GetAll;
 
-public class GetAllEndpoint(IAlbumRepository repository, IMessageProducerService messageProducer) : Endpoint<GetAllRequest, GetAllResponse>
+public class GetAllEndpoint(IAlbumRepository repository) : Endpoint<GetAllRequest, GetAllResponse>
 {
     public override void Configure()
     {
@@ -15,8 +15,6 @@ public class GetAllEndpoint(IAlbumRepository repository, IMessageProducerService
 
     public override async Task HandleAsync(GetAllRequest getAllRequest, CancellationToken ct)
     {
-        await messageProducer.SendMessageAsync("God jul!");
-
         var allAlbums = await repository.GetAllAsync();
         var dtos = allAlbums.Select(
             album => 
