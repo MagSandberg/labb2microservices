@@ -5,13 +5,17 @@ networks:
   customers:
   orders:
   gateway:
+  albumsmq:
+  ordersmq:
+  customersmq:
 
 services:
   albums.api:
     image: ${DOCKER_REGISTRY-}albumsapi
     networks:
-     - albums
-     - gateway
+      - albums
+      - gateway
+      - albumsmq
     build:
       context: .
       dockerfile: MicroServices/APIs/Albums/Albums.API/Dockerfile
@@ -21,13 +25,14 @@ services:
       - DB_HOST=albums.db
       - DB_DATABASE=AlbumsDB
     ports:
-     - "6200:8080"
+      - "6200:8080"
 
   customers.api:
     image: ${DOCKER_REGISTRY-}customersapi
     networks:
-     - customers
-     - gateway
+      - customers
+      - gateway
+      - customersmq
     build:
       context: .
       dockerfile: MicroServices/APIs/Customers/Customers.API/Dockerfile
@@ -43,42 +48,43 @@ services:
   orders.api:
     image: ${DOCKER_REGISTRY-}ordersapi
     networks:
-     - orders
-     - gateway
+      - orders
+      - gateway
+      - ordersmq
     build:
       context: .
       dockerfile: MicroServices/APIs/Orders/Orders.API/Dockerfile
     depends_on:
       - orders.db
     environment:
-     - DB_HOST=orders.db
-     - DB_DATABASE=OrdersDB
+      - DB_HOST=orders.db
+      - DB_DATABASE=OrdersDB
     ports:
-     - "6300:8080"
+      - "6300:8080"
 
   albums.db:
     container_name: albumsdb
     image: mongo:latest
     networks:
-     - albums
+      - albums
     ports:
-     - "6003:27017"
+      - "6003:27017"
 
   customers.db:
     container_name: customersdb
     image: mongo:latest
     networks:
-     - customers
+      - customers
     ports:
-     - "6001:27017"
+      - "6001:27017"
 
   orders.db:
     container_name: ordersdb
     image: mongo:latest
     networks:
-     - orders
+      - orders
     ports:
-     - "6002:27017"
+      - "6002:27017"
 
   gateway:
     image: ${DOCKER_REGISTRY-}gateway
@@ -86,12 +92,26 @@ services:
       context: .
       dockerfile: MicroServices/Gateway/Gateway/Dockerfile
     networks:
-     - gateway
+      - gateway
     depends_on:
-     - albums.api
-     - customers.api
-     - orders.api
+      - albums.api
+      - customers.api
+      - orders.api
     ports:
-     - "5000:8080"
-     - "5001:8081"
+      - "5000:8080"
+      - "5001:8081"
+
+  rabbitmq:
+    container_name: rabbit
+    image: rabbitmq:management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    networks:
+      - albumsmq
+      - customersmq
+      - ordersmq
 

@@ -1,10 +1,11 @@
-﻿using FastEndpoints;
+﻿using Domain.Common.RabbitMq;
+using FastEndpoints;
 using Orders.DataAccess;
 using Order = Orders.DataAccess.Order;
 
 namespace Orders.API.Endpoints.AddOrder;
 
-public class AddOrderEndpoint(IOrderRepository orderRepository) : Endpoint<AddOrderRequest, AddOrderResponse>
+public class AddOrderEndpoint(IOrderRepository orderRepository, IMessageProducerService messageProducer) : Endpoint<AddOrderRequest, AddOrderResponse>
 {
 	public override void Configure()
 	{
@@ -27,6 +28,8 @@ public class AddOrderEndpoint(IOrderRepository orderRepository) : Endpoint<AddOr
 		};
 
 		await orderRepository.AddAsync(order);
+
+		await messageProducer.SendMessageAsync(new Guid());
 
 		await SendAsync(new AddOrderResponse(), cancellation: cancellationToken);
 	}
