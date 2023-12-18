@@ -1,4 +1,6 @@
+using Domain.Common.RabbitMq;
 using FastEndpoints;
+using Orders.API.Services;
 using Orders.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddFastEndpoints();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
+builder.Services.AddSingleton(sp => new RabbitMqConfiguration()
+{
+	HostName = "rabbitmq",
+	Username = "guest",
+	Password = "guest"
+});
+
+builder.Services.AddScoped<IMessageProducerService, MessageProducerService>();
 
 var app = builder.Build();
 
