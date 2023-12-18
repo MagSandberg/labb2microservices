@@ -1,10 +1,11 @@
 ﻿using Albums.DataAccess.Repositories.Interfaces;
 using Albums.DataAccess.Models;
 using FastEndpoints;
+using Domain.Common.RabbitMq;
 
 namespace Albums.API.Endpoints.Add;
 
-public class AddEndpoint(IAlbumRepository repository) : Endpoint<AddRequest, AddResponse>
+public class AddEndpoint(IAlbumRepository repository, IMessageProducerService messageProducer) : Endpoint<AddRequest, AddResponse>
 {
     public override void Configure()
     {
@@ -29,6 +30,8 @@ public class AddEndpoint(IAlbumRepository repository) : Endpoint<AddRequest, Add
             Tracks = tracks,
             Price = addRequest.AddAlbum.Price
         });
+
+        await messageProducer.SendMessageAsync(addRequest.AddAlbum.Title);
 
         await SendAsync(new AddResponse()
         {

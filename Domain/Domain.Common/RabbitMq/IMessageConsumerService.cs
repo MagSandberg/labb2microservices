@@ -2,5 +2,5 @@
 
 public interface IMessageConsumerService
 {
-	Task ReadMessagesAsync();
+    Task ReadMessagesAsync();
 }
