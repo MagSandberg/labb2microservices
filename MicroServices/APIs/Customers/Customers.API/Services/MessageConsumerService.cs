@@ -8,7 +8,8 @@ namespace Customers.API.Services;
 
 public class MessageConsumerService : IMessageConsumerService, IDisposable
 {
-    private const string QueueName = "albumsQueue";
+    private const string AlbumsQueue = "albumsQueue";
+    private const string OrdersQueue = "ordersQueue";
     private readonly IConnection _connection;
     private readonly IModel _channel;
 
@@ -16,25 +17,41 @@ public class MessageConsumerService : IMessageConsumerService, IDisposable
     {
         _connection = rabbitMqService.CreateConnection();
         _channel = _connection.CreateModel();
-        _channel.QueueDeclare(QueueName, durable: true, exclusive: false);
+        _channel.QueueDeclare(AlbumsQueue, durable: true, exclusive: false);
         _channel.ExchangeDeclare("albumsExchange", ExchangeType.Fanout, durable: true);
-        _channel.QueueBind(QueueName, "albumsExchange", string.Empty);
+        _channel.QueueBind(AlbumsQueue, "albumsExchange", string.Empty);
+
+        _channel.QueueDeclare(OrdersQueue, durable: true, exclusive: false);
+        _channel.ExchangeDeclare("ordersExchange", ExchangeType.Fanout, durable: true);
+        _channel.QueueBind(OrdersQueue, "ordersExchange", string.Empty);
     }
 
     public async Task ReadMessagesAsync()
     {
-        var consumer = new AsyncEventingBasicConsumer(_channel);
-        consumer.Received += async (sender, e) =>
+        var albumsConsumer = new AsyncEventingBasicConsumer(_channel);
+        albumsConsumer.Received += async (sender, e) =>
         {
             var body = e.Body.ToArray();
             var message = Encoding.UTF8.GetString(body);
-            //Add deserialize logic for DTOs here
-            Console.WriteLine($"Message received: {message}");
+            Console.WriteLine($"Nu finns albumet {message} i lager, kom och köp!");
             await Task.CompletedTask;
             _channel.BasicAck(e.DeliveryTag, false);
         };
 
-        _channel.BasicConsume(QueueName, false, consumer);
+        var ordersConsumer = new AsyncEventingBasicConsumer(_channel);
+        ordersConsumer.Received += async (sender, e) =>
+        {
+            var body = e.Body.ToArray();
+            var message = Encoding.UTF8.GetString(body);
+            List<string> orderIdLista = new List<string>();
+            orderIdLista.Add(message);
+            Console.WriteLine($"Skriver ut orderListan: {orderIdLista[0]}");
+            await Task.CompletedTask;
+            _channel.BasicAck(e.DeliveryTag, false);
+        };
+
+        _channel.BasicConsume(AlbumsQueue, false, albumsConsumer);
+        _channel.BasicConsume(OrdersQueue, false, ordersConsumer);
     }
 
     public void Dispose()
