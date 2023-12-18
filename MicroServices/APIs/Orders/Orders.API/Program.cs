@@ -1,6 +1,5 @@
 using Domain.Common.RabbitMq;
 using FastEndpoints;
-using Orders.API.Services.Interfaces;
 using Orders.API.Services;
 using Orders.DataAccess;
 
@@ -17,7 +16,6 @@ builder.Services.AddSingleton(sp => new RabbitMqConfiguration()
 	Password = "guest"
 });
 
-builder.Services.AddSingleton<IRabbitMqService, RabbitMqService>();
 builder.Services.AddScoped<IMessageProducerService, MessageProducerService>();
 
 var app = builder.Build();
