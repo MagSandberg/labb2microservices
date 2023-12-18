@@ -29,7 +29,7 @@ public class AddOrderEndpoint(IOrderRepository orderRepository, IMessageProducer
 
 		await orderRepository.AddAsync(order);
 
-		await messageProducer.SendMessageAsync(new Guid());
+		await messageProducer.SendMessageAsync(Guid.NewGuid());
 
 		await SendAsync(new AddOrderResponse(), cancellation: cancellationToken);
 	}

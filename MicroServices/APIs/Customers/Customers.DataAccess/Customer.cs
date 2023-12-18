@@ -12,4 +12,5 @@ public class Customer : IEntity<ObjectId>
     public string City { get; init; }
     public string StreetAddress { get; init; }
     public int PostalCode { get; init; }
+    public List<string> OrderIds { get; init; }
 }

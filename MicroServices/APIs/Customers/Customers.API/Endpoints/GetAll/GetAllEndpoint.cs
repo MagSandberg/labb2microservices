@@ -23,7 +23,8 @@ public class GetAllEndpoint(ICustomerRepository customerRepository) : Endpoint<G
                     customer.Country,
                     customer.City,
                     customer.StreetAddress,
-                    customer.PostalCode)
+                    customer.PostalCode,
+                    customer.OrderIds)
         );
 
         await SendAsync(
