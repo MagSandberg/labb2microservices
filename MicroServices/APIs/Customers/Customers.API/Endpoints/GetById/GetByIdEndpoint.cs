@@ -27,7 +27,8 @@ public class GetByIdEndpoint(ICustomerRepository customerRepository) : Endpoint<
                         customer.Country,
                         customer.City,
                         customer.StreetAddress,
-                        customer.PostalCode
+                        customer.PostalCode,
+                        customer.OrderIds
                     )
             }, cancellation: cancellationToken);
     }

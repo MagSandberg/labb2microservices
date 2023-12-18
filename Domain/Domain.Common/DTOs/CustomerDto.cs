@@ -6,7 +6,8 @@ public record CustomerDto(
     string Country,
     string City,
     string StreetAddress,
-    int PostalCode
+    int PostalCode,
+    List<string> OrderIds
     );
 
 
