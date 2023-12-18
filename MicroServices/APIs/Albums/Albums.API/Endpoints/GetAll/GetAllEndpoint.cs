@@ -1,5 +1,6 @@
 ﻿using Albums.DataAccess.Repositories.Interfaces;
 using Domain.Common.DTOs;
+using Domain.Common.RabbitMq;
 using FastEndpoints;
 
 namespace Albums.API.Endpoints.GetAll;
